@@ -15,6 +15,7 @@ NAME='UltimateBluetoothUpdater'
 def main():
     import PyInstaller.__main__
     args=['main.py','--name',NAME,'--windowed','--onedir','--noconfirm','--clean',
+          '--additional-hooks-dir','hooks',
           '--add-data','ultimate_updater/resources:ultimate_updater/resources',
           '--add-data','licenses:licenses','--add-data','THIRD_PARTY.md:.',
           '--add-data','LICENSE:.','--add-data','README.md:.',
@@ -33,6 +34,12 @@ def main():
                     target=notices/package/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,target)
     args+=['--add-data',str(notices)+':dependency-licenses']
     PyInstaller.__main__.run(args)
+    bundle=ROOT/'dist'/(f'{NAME}.app' if sys.platform=='darwin' else NAME)
+    for file in bundle.rglob('*'):
+        if any(module in file.name for module in ('QtPdf','Qt6Pdf','QtVirtualKeyboard','Qt6VirtualKeyboard')):
+            raise RuntimeError(f'Unneeded Qt module included: {file.name}')
+    if not list(bundle.rglob('LGPL-3.0-only.txt')):
+        raise RuntimeError('Qt license text missing from application bundle')
     executable=ROOT/'dist'/NAME/NAME
     if sys.platform=='darwin':executable=ROOT/'dist'/f'{NAME}.app/Contents/MacOS'/NAME
     elif sys.platform=='win32':executable=executable.with_suffix('.exe')

@@ -14,6 +14,10 @@ firmware modifications. It does not relicense 8BitDo firmware or third-party dep
     and https://code.qt.io/cgit/qt/ . Use the corresponding 6.8.3 release.
   - Application bundles use the one-folder layout with replaceable shared libraries.
     Users may modify/relink those libraries under their applicable licenses.
+  - `licenses/qt-6.8.3/` includes upstream license texts and third-party
+    attributions from the `v6.8.3` tags of `pyside/pyside-setup`, `qt/qtbase`,
+    and `qt/qtsvg`. These are included explicitly because the Python wheels
+    do not contain the Qt license text files.
 - **cython-hidapi / HIDAPI**: https://github.com/trezor/cython-hidapi
   and https://github.com/libusb/hidapi . Retains its upstream BSD/public-domain
   license options and bundled notices.
