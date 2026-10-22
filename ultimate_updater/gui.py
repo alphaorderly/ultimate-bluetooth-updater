@@ -105,7 +105,7 @@ class Window(QMainWindow):
         for text, slot in [('백업 폴더',self.open_backups),('공식 파일 가져오기',self.import_files),('사용 방법',self.help)]:
             button = QPushButton(text); button.clicked.connect(slot); footer.addWidget(button)
         layout.addLayout(footer)
-        note = QLabel('비공식 커뮤니티 펌웨어입니다. 8BitDo와 제휴하지 않습니다.\nGUI 앱의 USB 설치는 실기기 미검증 베타입니다. 쓰는 동안 USB를 분리하지 마세요.'); note.setObjectName('sub'); note.setWordWrap(True); layout.addWidget(note)
+        note = QLabel('비공식 커뮤니티 펌웨어입니다. 8BitDo와 제휴하지 않습니다.\n펌웨어를 쓰는 동안 USB를 분리하지 마세요.'); note.setObjectName('sub'); note.setWordWrap(True); layout.addWidget(note)
         layout.addStretch()
         self.timer = QTimer(self); self.timer.timeout.connect(self.detect); self.timer.start(2000)
         self.detect()
