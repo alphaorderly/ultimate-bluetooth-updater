@@ -30,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14
+          - os: macos-15
             artifact: macOS-arm64
           - os: macos-15-intel
             artifact: macOS-x64
@@ -78,4 +78,4 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$RELEASE_TAG" release/*.zip release/*.sha256 --prerelease --title "Ultimate Bluetooth Updater $RELEASE_TAG" --notes "Community beta for Ultimate Bluetooth only. Includes macOS Apple Silicon, macOS Intel, and Windows x64. Windows USB flashing has not yet been tested on physical hardware. See README for supported firmware, learning instructions, backup, recovery, and unsigned application notes."
+          gh release create "$RELEASE_TAG" release/*.zip release/*.sha256 --prerelease --title "Ultimate Bluetooth Updater $RELEASE_TAG" --notes "Community beta for Ultimate Bluetooth only. Includes macOS Apple Silicon, macOS Intel, and Windows x64. The firmware has successfully woken Switch 2 on one controller. The new GUI application's HID USB flashing path has not yet been tested on physical hardware on either macOS or Windows. Builds include offline transaction tests and packaged GUI startup checks. See README for supported firmware, learning instructions, backup, recovery, and unsigned application notes."

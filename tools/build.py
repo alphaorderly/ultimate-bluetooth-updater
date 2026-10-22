@@ -36,7 +36,9 @@ def main():
     executable=ROOT/'dist'/NAME/NAME
     if sys.platform=='darwin':executable=ROOT/'dist'/f'{NAME}.app/Contents/MacOS'/NAME
     elif sys.platform=='win32':executable=executable.with_suffix('.exe')
-    subprocess.run([str(executable),'--self-test'],check=True)
+    subprocess.run([str(executable),'--self-test'],check=True,timeout=60)
+    subprocess.run([str(executable),'--gui-self-test'],check=True,timeout=60,
+                   env={**os.environ,'QT_QPA_PLATFORM':'offscreen'})
     label={'darwin':'macOS','win32':'Windows'}.get(sys.platform,sys.platform)+'-'+platform.machine().lower().replace('amd64','x64').replace('x86_64','x64')
     archive=ROOT/'dist'/f'{NAME}-{label}.zip'
     if sys.platform=='darwin':
@@ -44,6 +46,6 @@ def main():
     else:
         shutil.make_archive(str(archive.with_suffix('')),'zip',ROOT/'dist',NAME)
     archive.with_suffix('.zip.sha256').write_text(hashlib.sha256(archive.read_bytes()).hexdigest()+'  '+archive.name+'\n')
-    print(json.dumps({'archive':str(archive),'bytes':archive.stat().st_size()}))
+    print(json.dumps({'archive':str(archive),'bytes':archive.stat().st_size}))
 
 if __name__=='__main__':main()
