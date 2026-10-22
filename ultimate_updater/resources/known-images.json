@@ -1,0 +1,32 @@
+[
+  {
+    "bytes": 104448,
+    "sha256": "8723d9c5d5f0d68ed47ff9aefbcad396b2f40e8432b22341e4304ef73dd5f949",
+    "name": "19-ultimate-v1.09-decrypted.bin"
+  },
+  {
+    "bytes": 104448,
+    "sha256": "60480af63384623d00b63e140a456f308658fd7cff99411bfa14f8eecc324822",
+    "name": "19-ultimate-v1.10-decrypted.bin"
+  },
+  {
+    "bytes": 104960,
+    "sha256": "fa653c10bba23ec346ea92b85493a37b0b6dda53534c7257214c4d41f80ada8d",
+    "name": "19-ultimate-v1.11-decrypted.bin"
+  },
+  {
+    "bytes": 104960,
+    "sha256": "173a99107bec7953942b9ef6e9564c6c7861af3cdd9e1595fe010499cea5a1b4",
+    "name": "24-back-button-remap"
+  },
+  {
+    "bytes": 104960,
+    "sha256": "e8abf17cf2053212c45bcbc0e509c5231045600c0014c084ccc6c1d25befce2b",
+    "name": "27-switch2-wake-probe"
+  },
+  {
+    "bytes": 114688,
+    "sha256": "f8edd30b192b9faa5d29039328b0882b79d0094f7d1c2597d8c018117e6bf552",
+    "name": "28-switch2-wake-learning"
+  }
+]

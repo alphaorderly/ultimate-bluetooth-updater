@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+build/
+dist/
+*.egg-info/
+local-cache/
+backups/
+*.dat
+*.bin
+*.elf
+*.log
+*.dmp
+

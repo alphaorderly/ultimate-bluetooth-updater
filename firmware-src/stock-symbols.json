@@ -1,0 +1,21 @@
+{
+  "stock_flag_clear": 16879869,
+  "stock_flag_read": 16879903,
+  "stock_flag_set": 16879949,
+  "stock_event_peek": 16880513,
+  "stock_event_read": 16885741,
+  "stock_ble_address": 16886637,
+  "stock_ble_name": 16886821,
+  "stock_features": 16887665,
+  "stock_init_tail": 16890021,
+  "stock_rumble": 16892373,
+  "stock_hardware_read": 16921293,
+  "stock_queue_write": 16934693,
+  "stock_submit": 16935041,
+  "stock_clock": 16941493,
+  "stock_expired": 16941505,
+  "stock_legacy_wake": 16951937,
+  "stock_flash_read": 16961485,
+  "stock_flash_erase": 16961545,
+  "stock_flash_write": 16961585
+}
