@@ -8,7 +8,7 @@ macOS Apple Silicon / Intel 및 Windows x64 앱을 GitHub Actions로 빌드합�
 
 > **베타:** 수정 펌웨어는 Ultimate Bluetooth 한 대에서 설치·전체 재읽기와 실제 Switch 2 깨우기 성공을 확인했습니다.
 > 새 GUI 앱의 hidapi USB 전송 경로는 macOS·Windows 모두 아직 실기기 설치 검증 전입니다.
-> Actions 성공은 앱 빌드·시뮬레이터 검사 결과이며 Windows 하드웨어 검증을 의미하지 않습니다.
+> Actions 성공은 앱 빌드·시뮬레이터 검사 결과이며 USB 하드웨어 검증을 의미하지 않습니다.
 
 ## 다운로드 및 실행
 

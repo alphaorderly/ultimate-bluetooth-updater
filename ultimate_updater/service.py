@@ -121,7 +121,7 @@ class Installer:
 
 def load_backup(path):
     path = Path(path)
-    record = json.loads(path.read_text())
+    record = json.loads(path.read_text(encoding='utf-8'))
     data = (path.parent/'app.bin').read_bytes()
     version = (path.parent/'version.bin').read_bytes()
     if record.get('schema') != 1 or record.get('app_address') != APP_BASE:
