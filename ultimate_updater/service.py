@@ -73,6 +73,8 @@ class Installer:
             identity = self.transport.open()
             self.transport.exchange(Request(8, length=2, total=2))
             previous, peer = self.backup(identity)
+            if not recovery and self.record['version'] not in (109,110,111):
+                raise ProtocolError('현재 버전 정보가 지원 범위와 다릅니다. 백업만 완료했습니다.')
             if not recovery and not identify_image(previous):
                 raise ProtocolError('현재 펌웨어가 지원 목록과 다릅니다. 백업만 완료했으며 설치하지 않았습니다.')
             self.emit('백업 완료 · 설치 준비', 30)

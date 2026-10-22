@@ -27,7 +27,7 @@ def main():
     for package in ['PySide6','PySide6-Essentials','PySide6-Addons','shiboken6','hidapi','pyinstaller']:
         dist=importlib.metadata.distribution(package)
         for file in dist.files or []:
-            if any(word in file.name.lower() for word in ['license','copying']) and str(file).endswith(('.txt','.md','.rst','LICENSE','COPYING')):
+            if any(word in file.name.lower() for word in ['license','copying']) and not str(file).endswith(('.py','.pyc')):
                 src=Path(dist.locate_file(file))
                 if src.is_file():
                     target=notices/package/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,target)

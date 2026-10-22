@@ -2,11 +2,12 @@ import json
 from pathlib import Path
 import struct
 import tempfile
+import types
 import unittest
 from unittest.mock import patch
 
 from ultimate_updater import firmware as fw
-from ultimate_updater.protocol import Request, ProtocolError, crc16
+from ultimate_updater.protocol import Request, ProtocolError, HidTransport, crc16
 from ultimate_updater.service import Installer, load_backup, Cancelled
 
 
@@ -86,6 +87,22 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual(fw.identify_image(b'abcd\xff'),'test')
             self.assertIsNone(fw.identify_image(b'abcd\0'))
 
+    def test_hid_report_id_framing_and_ambiguous_device_rejection(self):
+        r=Request(8,length=2,total=2)
+        class Device:
+            sent=None
+            def open_path(self,path):self.path=path
+            def write(self,data):self.sent=data;return len(data)
+            def read(self,size,timeout):return reply(r,b'\x07\x60\0\0')
+            def close(self):pass
+        dev=Device()
+        module=types.SimpleNamespace(enumerate=lambda *args:[{'path':b'device'}],device=lambda:dev)
+        with patch.dict('sys.modules',{'hid':module}):
+            t=HidTransport();t.open();self.assertEqual(t.exchange(r),b'\x07\x60\0\0');t.close()
+            self.assertEqual(dev.sent,b'\0'+r.packet())
+            module.enumerate=lambda *args:[{'path':b'a'},{'path':b'b'}]
+            with self.assertRaises(ProtocolError):HidTransport().open()
+
 
 class TransactionTests(unittest.TestCase):
     def setUp(self):
@@ -142,6 +159,11 @@ class TransactionTests(unittest.TestCase):
     def test_backup_persist_failure_never_erases(self):
         with patch('ultimate_updater.service.atomic_write',side_effect=OSError('disk full')):
             with self.assertRaises(OSError):self.installer().install(self.new)
+        self.assertFalse(any(r.command in (2,3,4,7) for r in self.device.calls))
+
+    def test_unsupported_version_never_erases(self):
+        self.device.version=struct.pack('<I',999)
+        with self.assertRaises(ProtocolError):self.installer().install(self.new)
         self.assertFalse(any(r.command in (2,3,4,7) for r in self.device.calls))
 
 
